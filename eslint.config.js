@@ -98,6 +98,21 @@ export default tseslint.config(
         {
           paths: [
             {
+              name: 'vue',
+              allowTypeImports: true,
+              message: 'Vue 运行时 API 必须使用自动导入；仅允许 import type。',
+            },
+            {
+              name: 'pinia',
+              allowTypeImports: true,
+              message: 'Pinia 运行时 API 必须使用自动导入；仅允许 import type。',
+            },
+            {
+              name: 'vue-router',
+              importNames: ['onBeforeRouteLeave', 'onBeforeRouteUpdate', 'useLink', 'useRoute', 'useRouter'],
+              message: 'Vue Router Composable 必须使用自动导入。',
+            },
+            {
               name: 'element-plus',
               allowTypeImports: true,
               message: 'Element Plus 运行时 API 和组件必须使用自动导入；仅允许 import type。',

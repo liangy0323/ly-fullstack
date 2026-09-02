@@ -4,8 +4,6 @@ import { API_APP_HEALTH } from './api';
 
 import type { HealthStatus } from '@repo/shared/types';
 
-export type { HealthStatus };
-
 /**
  * 获取管理 API 健康状态
  *

@@ -17,7 +17,7 @@
 
       <div class="admin-crud-page__table">
         <el-table v-loading="loading" class="admin-table" :data="userList" height="100%">
-          <el-table-column label="序号" width="76" align="center">
+          <el-table-column label="序号" min-width="76" align="center">
             <template #default="{ $index }">
               {{ (filters.pageNum - 1) * filters.pageSize + $index + 1 }}
             </template>
@@ -35,7 +35,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="账号类型" width="110" align="center">
+          <el-table-column label="账号类型" min-width="110" align="center">
             <template #default="{ row }">
               <base-badge :tone="row.isSystem ? 'primary' : 'neutral'">
                 {{ row.isSystem ? '系统内置' : '普通用户' }}
@@ -58,7 +58,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="状态" width="100" align="center">
+          <el-table-column label="状态" min-width="100" align="center">
             <template #default="{ row }">
               <base-badge :tone="row.isActive ? 'success' : 'warning'" dot>
                 {{ row.isActive ? '启用' : '停用' }}

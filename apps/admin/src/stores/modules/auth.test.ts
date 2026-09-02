@@ -1,5 +1,4 @@
 import { beforeEach, describe, expect, it, rstest } from '@rstest/core';
-import { createPinia, setActivePinia } from 'pinia';
 
 import { fetchAdminSession, loginAdmin } from '@/api';
 import { useAuthStore } from './auth';

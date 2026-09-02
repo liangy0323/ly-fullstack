@@ -49,7 +49,7 @@ Element Plus Sass 源码编译生成 --el-* 变量和组件样式
   → Theme Store 持久化 ThemePreference
   → html[data-theme] 更新
   → CSS 语义变量立即切换
-  → EVENT_THEME_CHANGE 通知 Canvas / WebGL / ECharts
+  → admin-theme-change 原生事件通知 Canvas / WebGL / ECharts
 ```
 
 ## 文件职责
@@ -374,18 +374,17 @@ Pinia 必须先执行 `app.use(pinia)`，之后才能创建任何依赖插件的
 
 CSS DOM 会自动跟随变量变化，但已经写入 Canvas 或 WebGL Uniform 的颜色不会自动更新。
 
-`useTheme.setTheme()` 会广播：
+`useTheme.setTheme()` 会派发浏览器原生事件：
 
 ```ts
-emitter.emit('EVENT_THEME_CHANGE', value);
+window.dispatchEvent(new Event(ADMIN_THEME_CHANGE_EVENT));
 ```
 
 需要主动重绘的组件应：
 
-1. `onMounted` 订阅 `EVENT_THEME_CHANGE`；
-2. 使用 `ThemeName` 约束参数；
-3. 更新图表配置或销毁并重建渲染器；
-4. `onBeforeUnmount` 取消订阅并释放资源。
+1. `onMounted` 通过 `window.addEventListener` 订阅 `ADMIN_THEME_CHANGE_EVENT`；
+2. 更新图表配置或销毁并重建渲染器；
+3. `onBeforeUnmount` 通过 `window.removeEventListener` 取消订阅并释放资源。
 
 当前 Dashboard 图表和 Fluid Glass Card 可以作为范本。禁止为了普通 DOM 颜色订阅该事件，普通 DOM 应继续使用 CSS 变量。
 

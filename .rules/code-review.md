@@ -12,12 +12,12 @@
 // ✅ 注册和清除必须成对出现
 onMounted(() => {
   window.addEventListener('resize', handleResize);
-  emitter.on(EVENT_SCROLL_TO_BOTTOM, handleScroll);
+  window.addEventListener(ADMIN_THEME_CHANGE_EVENT, handleThemeChange);
 });
 
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize);
-  emitter.off(EVENT_SCROLL_TO_BOTTOM, handleScroll);
+  window.removeEventListener(ADMIN_THEME_CHANGE_EVENT, handleThemeChange);
 });
 
 // ❌ 只注册不清除

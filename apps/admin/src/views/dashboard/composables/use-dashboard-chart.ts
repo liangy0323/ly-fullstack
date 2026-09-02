@@ -1,7 +1,6 @@
-import { nextTick, onBeforeUnmount, onMounted } from 'vue';
 import type { ShallowRef } from 'vue';
 import { initChart } from '@repo/charts';
-import { emitter } from '@/emitter';
+import { ADMIN_THEME_CHANGE_EVENT } from '@/constants';
 import type { ChartInstance, ChartOption } from '@repo/charts';
 
 /**
@@ -57,12 +56,12 @@ export const useDashboardChart = (
    * 生命周期函数。
    */
   onMounted(() => {
-    emitter.on('EVENT_THEME_CHANGE', handleThemeChange);
+    window.addEventListener(ADMIN_THEME_CHANGE_EVENT, handleThemeChange);
     setup();
   });
 
   onBeforeUnmount(() => {
-    emitter.off('EVENT_THEME_CHANGE', handleThemeChange);
+    window.removeEventListener(ADMIN_THEME_CHANGE_EVENT, handleThemeChange);
     resizeObserver?.disconnect();
     chartInstance?.dispose();
   });

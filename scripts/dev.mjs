@@ -389,7 +389,7 @@ const canListen = (port) => {
     const server = createServer();
     server.once('error', () => resolvePromise(false));
     server.once('listening', () => server.close(() => resolvePromise(true)));
-    server.listen(port, '0.0.0.0');
+    server.listen({ port, host: '0.0.0.0', exclusive: true });
   });
 };
 

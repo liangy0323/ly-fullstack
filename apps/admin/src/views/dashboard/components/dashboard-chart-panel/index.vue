@@ -30,11 +30,6 @@
 
 <script setup lang="ts">
 /**
- * 图表挂载节点使用模板引用，面板标题和图例由 variant 计算得到。
- */
-import { computed, useTemplateRef } from 'vue';
-
-/**
  * 标题图标用于区分折线趋势与柱状分布两类演示图表。
  */
 import { ChartNoAxesColumnIncreasing, TrendingUp } from '@lucide/vue';

@@ -15,7 +15,7 @@
       />
       <div class="admin-crud-page__table">
         <el-table v-loading="loading" class="admin-table" :data="dictionaryList" height="100%">
-          <el-table-column label="序号" width="76" align="center">
+          <el-table-column label="序号" min-width="76" align="center">
             <template #default="{ $index }">{{ (filters.pageNum - 1) * filters.pageSize + $index + 1 }}</template>
           </el-table-column>
           <el-table-column prop="name" label="字典名称" min-width="150" />
@@ -27,8 +27,8 @@
           <el-table-column prop="description" label="说明" min-width="220" show-overflow-tooltip>
             <template #default="{ row }">{{ row.description || '-' }}</template>
           </el-table-column>
-          <el-table-column prop="itemCount" label="字典项" width="90" align="center" />
-          <el-table-column label="状态" width="100" align="center">
+          <el-table-column prop="itemCount" label="字典项" min-width="90" align="center" />
+          <el-table-column label="状态" min-width="100" align="center">
             <template #default="{ row }">
               <base-badge :tone="row.isActive ? 'success' : 'warning'" dot>
                 {{ row.isActive ? '启用' : '停用' }}

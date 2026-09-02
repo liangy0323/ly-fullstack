@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, rstest } from '@rstest/core';
-import { createPinia, setActivePinia } from 'pinia';
 
+import { ADMIN_THEME_CHANGE_EVENT } from '@/constants';
 import { useThemeStore as createThemeStore } from '@/stores/modules/theme';
 import { setupAdminTheme, useTheme } from './use-theme';
 
@@ -56,6 +56,8 @@ describe('主题 Composable', () => {
   it('用户主动切换后保留明确主题，不再跟随系统变化', () => {
     const disposeTheme = setupAdminTheme(themeStore);
     const { setTheme } = useTheme();
+    const themeChangeListener = rstest.fn();
+    window.addEventListener(ADMIN_THEME_CHANGE_EVENT, themeChangeListener, { once: true });
 
     setTheme('light');
     systemThemeListener?.({ matches: true } as MediaQueryListEvent);
@@ -63,6 +65,7 @@ describe('主题 Composable', () => {
     expect(themeStore.themePreference).toBe('light');
     expect(themeStore.themeName).toBe('light');
     expect(document.documentElement.dataset.theme).toBe('light');
+    expect(themeChangeListener).toHaveBeenCalledTimes(1);
 
     disposeTheme();
   });

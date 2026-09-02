@@ -35,11 +35,6 @@
 
 <script setup lang="ts">
 /**
- * 当前节点是否拥有子节点由计算属性派生，递归菜单无需维护额外展开状态。
- */
-import { computed } from 'vue';
-
-/**
  * 展开与收起图标只用于一级菜单标题，二级及更深层级保持纯文本展示。
  */
 import { ChevronDown, ChevronUp } from '@lucide/vue';

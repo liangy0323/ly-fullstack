@@ -22,8 +22,12 @@
     background: var(--border-color);
   }
 
-  .el-table-fixed-column--right,
-  .el-table-fixed-column--left {
-    background: var(--fill-color);
+  .el-table__header-wrapper,
+  .el-table__body-wrapper,
+  .el-table__footer-wrapper {
+    .el-table-fixed-column--right,
+    .el-table-fixed-column--left {
+      background: var(--fill-color);
+    }
   }
 }

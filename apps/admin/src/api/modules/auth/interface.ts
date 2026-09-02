@@ -18,11 +18,6 @@ import type {
 } from '@repo/shared/types';
 
 /**
- * 向页面 Composable 和 Store 透出认证接口使用的 Shared HTTP 契约
- */
-export type { AdminLoginParams, AdminLoginResponse, AdminSession };
-
-/**
  * 创建一次性登录图片滑块挑战
  *
  * 服务端返回已绘制缺口的背景图和拼图块，不会把正确横坐标下发给浏览器。

@@ -123,7 +123,6 @@ apps/admin/
 │   │   ├── overlay/             # 命令式覆盖层调用能力（barrel + modules）
 │   │   └── <feature>/           # 按业务域分组的组件
 │   ├── constants/               # 常量（barrel + modules）
-│   ├── emitter/                 # 类型化事件总线
 │   ├── env/                     # 运行时环境读取与归一化
 │   ├── feedback/                # 用户反馈能力（barrel + modules）
 │   ├── composables/             # 跨页面组合式函数，不放页面 CRUD 业务逻辑

@@ -18,7 +18,7 @@
       />
       <div class="admin-crud-page__table">
         <el-table v-loading="loading" class="admin-table" :data="configList" height="100%">
-          <el-table-column label="序号" width="76" align="center">
+          <el-table-column label="序号" min-width="76" align="center">
             <template #default="{ $index }">{{ (filters.pageNum - 1) * filters.pageSize + $index + 1 }}</template>
           </el-table-column>
           <el-table-column prop="key" label="配置键" min-width="220">

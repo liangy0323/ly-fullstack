@@ -37,16 +37,12 @@
 </template>
 
 <script setup lang="ts">
-/**
- * Vue 响应式、模板引用和生命周期能力用于管理 WebGL 画布的创建、重建与资源释放。
- */
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, useTemplateRef } from 'vue';
 import type { Component, CSSProperties } from 'vue';
 
 /**
- * 全局主题事件用于在根节点主题切换完成后重建与主题对应的片元着色器。
+ * 原生主题事件用于在根节点主题切换完成后重建与主题对应的片元着色器。
  */
-import { emitter } from '@/emitter';
+import { ADMIN_THEME_CHANGE_EVENT } from '@/constants';
 
 /**
  * 主题 Composable 提供组件首次挂载时使用的当前主题真相源。
@@ -241,23 +237,21 @@ const setupRenderer = async (nextThemeName: ThemeName): Promise<void> => {
 
 /**
  * 收到全局主题通知后切换卡片材质
- *
- * @param nextThemeName 切换后的主题名称
  */
-const handleThemeChange = (nextThemeName: ThemeName): void => {
-  void setupRenderer(nextThemeName);
+const handleThemeChange = (): void => {
+  void setupRenderer(themeName.value);
 };
 
 /**
  * 生命周期函数
  */
 onMounted(() => {
-  emitter.on('EVENT_THEME_CHANGE', handleThemeChange);
+  window.addEventListener(ADMIN_THEME_CHANGE_EVENT, handleThemeChange);
   void setupRenderer(themeName.value);
 });
 
 onBeforeUnmount(() => {
-  emitter.off('EVENT_THEME_CHANGE', handleThemeChange);
+  window.removeEventListener(ADMIN_THEME_CHANGE_EVENT, handleThemeChange);
   rendererGeneration += 1;
   destroyRenderer?.();
 });

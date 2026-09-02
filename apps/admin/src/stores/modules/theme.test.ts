@@ -1,5 +1,4 @@
 import { beforeEach, describe, expect, it } from '@rstest/core';
-import { createPinia, setActivePinia } from 'pinia';
 
 import { useThemeStore } from './theme';
 

@@ -1,6 +1,4 @@
-import { computed } from 'vue';
-import { storeToRefs } from 'pinia';
-import { emitter } from '@/emitter';
+import { ADMIN_THEME_CHANGE_EVENT } from '@/constants';
 import { useThemeStore } from '@/stores';
 import type { ThemeName } from '@/types';
 
@@ -26,7 +24,7 @@ const resolveSystemThemeName = (prefersDark: boolean): ThemeName => (prefersDark
 const applyTheme = (value: ThemeName, shouldEmit = true): void => {
   document.documentElement.dataset.theme = value;
   if (shouldEmit) {
-    emitter.emit('EVENT_THEME_CHANGE', value);
+    window.dispatchEvent(new Event(ADMIN_THEME_CHANGE_EVENT));
   }
 };
 

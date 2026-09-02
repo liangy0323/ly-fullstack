@@ -59,7 +59,6 @@ catalog:
   husky: 9.1.7
   js-cookie: 3.0.8
   lint-staged: 17.3.0
-  mitt: 3.0.1
   pg: 8.23.0
   pinia: 4.0.3
   pinia-plugin-persistedstate: 4.7.1

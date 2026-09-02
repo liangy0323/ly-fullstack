@@ -21,7 +21,6 @@
     "axios": "catalog:",
     "element-plus": "catalog:",
     "js-cookie": "catalog:",
-    "mitt": "catalog:",
     "pinia": "catalog:",
     "pinia-plugin-persistedstate": "catalog:",
     "vue": "catalog:",

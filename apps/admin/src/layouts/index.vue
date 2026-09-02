@@ -17,11 +17,6 @@
 
 <script setup lang="ts">
 /**
- * Vue 响应式与生命周期能力用于控制侧栏状态，并避免首次加载播放路由切换动画。
- */
-import { computed, nextTick, onMounted, ref } from 'vue';
-
-/**
  * 后台布局由固定侧栏和顶部栏组成，业务页面通过 RouterView 注入内容区域。
  */
 import LayoutHeader from '@/components/layouts/layout-header/index.vue';

@@ -25,8 +25,8 @@
         <el-table-column prop="description" label="说明" min-width="180" show-overflow-tooltip>
           <template #default="{ row }">{{ row.description || '-' }}</template>
         </el-table-column>
-        <el-table-column prop="sortOrder" label="排序" width="80" align="center" />
-        <el-table-column label="状态" width="90" align="center">
+        <el-table-column prop="sortOrder" label="排序" min-width="80" align="center" />
+        <el-table-column label="状态" min-width="90" align="center">
           <template #default="{ row }">
             <base-badge :tone="row.isActive ? 'success' : 'warning'" dot>
               {{ row.isActive ? '启用' : '停用' }}

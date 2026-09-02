@@ -1,5 +1,4 @@
 import { beforeEach, describe, expect, it, rstest } from '@rstest/core';
-import { getCurrentInstance } from 'vue';
 
 import { createAdminRole, updateAdminRole } from '@/api';
 import { withSetup } from '@tests/with-setup';

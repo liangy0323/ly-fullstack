@@ -7,7 +7,6 @@ export * from './modules/axios';
 export * from './modules/dashboard';
 export * from './modules/dictionary';
 export * from './modules/display';
-export * from './modules/emitter';
 export * from './modules/header';
 export * from './modules/login';
 export * from './modules/menu';

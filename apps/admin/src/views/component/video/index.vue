@@ -30,9 +30,7 @@
             <base-badge tone="success" dot>已接入</base-badge>
           </div>
 
-          <div class="video-showcase-page__player-shell">
-            <div ref="playerRef" class="video-showcase-page__player"></div>
-          </div>
+          <xg-video-player :url="XGPLAYER_DEMO_URL" />
         </section>
       </div>
     </el-scrollbar>
@@ -41,17 +39,12 @@
 
 <script setup lang="ts">
 import { ExternalLink } from '@lucide/vue';
-import { useVideoPlayer } from './composables/use-video-player';
+import XgVideoPlayer from './components/xg-video-player/index.vue';
 
 /**
- * 视频播放器挂载节点。
+ * 西瓜播放器官方演示视频地址
  */
-const playerRef = useTemplateRef<HTMLElement>('playerRef');
-
-/**
- * 初始化播放器并在页面离开时释放实例。
- */
-useVideoPlayer(playerRef);
+const XGPLAYER_DEMO_URL = 'https://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4';
 </script>
 
 <style lang="scss" src="./index.scss" scoped></style>
