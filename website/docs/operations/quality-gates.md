@@ -90,6 +90,8 @@ pnpm test:e2e
 
 E2E 依赖已经完成 Setup 的 PostgreSQL、可用管理员账号和浏览器环境。它验证真实登录、菜单权限和关键页面流程，不包含在普通 `pnpm check` 中。
 
+本地首次运行前需要准备独立测试数据库、`.env.e2e` 和 Chromium。完整步骤见 [Playwright 自动化测试](/operations/playwright)。
+
 远程 CI 的集成 Job 会：
 
 1. 启动 PostgreSQL 17 服务；

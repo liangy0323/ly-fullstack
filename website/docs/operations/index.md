@@ -42,5 +42,6 @@ Admin API / API ──► PostgreSQL
 
 - [环境变量](/operations/environment)：公开配置、秘密配置和各环境职责。
 - [质量门禁](/operations/quality-gates)：本地检查、CI 和 E2E 的区别。
+- [Playwright 自动化测试](/operations/playwright)：准备独立测试库，运行和调试真实浏览器回归。
 - [生产部署](/operations/production)：从构建到 Nginx、验收与回滚。
 - [常见问题](/operations/troubleshooting)：Setup、端口、CORS、Prisma、缓存和 404。

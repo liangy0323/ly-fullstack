@@ -2,6 +2,7 @@
   { "type": "file", "name": "index", "label": "部署运维总览" },
   { "type": "file", "name": "environment", "label": "环境变量" },
   { "type": "file", "name": "quality-gates", "label": "质量门禁" },
+  { "type": "file", "name": "playwright", "label": "Playwright 自动化测试" },
   { "type": "file", "name": "production", "label": "生产部署" },
   { "type": "file", "name": "troubleshooting", "label": "常见问题" }
 ]

@@ -207,6 +207,41 @@ pnpm new:server
 | `pnpm docs:build`         | 构建文档站、页面 Markdown 与 `llms.txt`          |
 | `pnpm check`              | 完整代码门禁并构建官方文档站                     |
 
+## Playwright 自动化测试
+
+Playwright 使用独立 PostgreSQL 测试库和独立端口启动 Admin、Admin API 与默认 API，验证真实浏览器中的登录认证、用户/菜单/字典/公共配置 CRUD、五表 RBAC、公开读取接口与服务安全边界。E2E 不包含在 `pnpm check` 中；修改登录、权限、路由或关键业务流程后，需要额外执行。
+
+首次运行先安装 Chromium：
+
+```bash
+pnpm exec playwright install chromium
+```
+
+然后创建名称包含 `e2e`、`test` 或 `ci` 的本机 PostgreSQL 独立数据库，例如 `ly_fullstack_e2e`。复制根目录的 [`.env.e2e.example`](.env.e2e.example) 为被 Git 忽略的 `.env.e2e`，填写测试库连接和测试管理员密码：
+
+```dotenv
+E2E_DATABASE_URL=postgresql://postgres:<本地密码>@127.0.0.1:5432/ly_fullstack_e2e?schema=public
+E2E_ADMIN_USERNAME=admin
+E2E_ADMIN_PASSWORD=<仅用于该测试库的密码>
+```
+
+`.env.e2e` 只能连接本机测试数据库，禁止填写开发库或生产库。运行测试时会自动执行 migration、生成 Prisma Client、幂等 seed，并通过真实登录页生成临时认证状态，不会重置数据库。
+
+```bash
+# 无头完整回归
+pnpm test:e2e
+
+# UI 模式与有头调试
+pnpm test:e2e:ui
+pnpm test:e2e:headed
+
+# Playwright Inspector 与上一次 HTML 报告
+pnpm test:e2e:debug
+pnpm test:e2e:report
+```
+
+失败截图、视频、Trace 和页面错误上下文写入被 Git 忽略的 `test-results/` 与 `playwright-report/`。完整的覆盖范围、端口配置、CI 行为和排错方法见 [Playwright 自动化测试](https://liangy0323.github.io/ly-fullstack/operations/playwright.html)。
+
 ## 目录结构
 
 ```text
