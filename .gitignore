@@ -13,6 +13,7 @@ website/doc_build/
 .env
 .env.*
 !.env.example
+!.env.e2e.example
 
 # Admin 是浏览器应用，三套环境只包含会进入前端产物的公开构建配置
 !apps/admin/.env.development

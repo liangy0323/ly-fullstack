@@ -26,7 +26,7 @@
       </button>
     </div>
 
-    <div ref="sliderTrackRef" class="slide-verify__track" :class="trackStateClass">
+    <div ref="sliderTrackRef" class="slide-verify__track" :class="trackStateClass" data-testid="login-captcha-track">
       <div class="slide-verify__mask" :style="sliderMaskStyle"></div>
       <span>{{ statusText }}</span>
       <button

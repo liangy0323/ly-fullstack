@@ -55,6 +55,7 @@
         <button
           class="layout-header__profile-trigger"
           type="button"
+          aria-label="管理员菜单"
           aria-haspopup="menu"
           :aria-expanded="isProfileOpen"
           @click="handleProfileToggle"

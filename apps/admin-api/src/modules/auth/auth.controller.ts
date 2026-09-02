@@ -40,7 +40,7 @@ export class AuthController {
   })
   @UseGuards(ThrottlerGuard)
   createCaptcha(@Headers('x-ly-e2e-captcha') e2eMarker?: string): Promise<AdminCaptchaResponse> {
-    const exposeTestOffset = process.env.APP_ENV !== 'production' && e2eMarker === 'playwright';
+    const exposeTestOffset = process.env.APP_ENV === 'test' && e2eMarker === 'playwright';
     return this.authCaptchaService.createCaptcha(exposeTestOffset);
   }
 

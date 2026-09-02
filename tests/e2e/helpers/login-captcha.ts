@@ -49,7 +49,7 @@ export const completeLoginCaptcha = async (page: Page): Promise<void> => {
   }
 
   const slider = page.getByRole('slider', { name: '拖动滑块完成图片验证' });
-  const track = page.locator('.slide-verify__track');
+  const track = page.getByTestId('login-captcha-track');
   await slider.waitFor({ state: 'visible' });
 
   const [sliderBox, trackBox] = await Promise.all([slider.boundingBox(), track.boundingBox()]);

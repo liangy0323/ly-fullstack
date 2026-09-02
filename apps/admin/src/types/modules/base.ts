@@ -1,3 +1,6 @@
+import type { PaginationParams } from '@repo/shared/types';
+import type { Ref } from 'vue';
+
 /**
  * 管理后台支持的主题名称
  *
@@ -224,6 +227,3 @@ export interface UseDataFilterPanelOptions {
    */
   onReset: () => void;
 }
-
-import type { PaginationParams } from '@repo/shared/types';
-import type { Ref } from 'vue';

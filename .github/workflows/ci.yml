@@ -39,7 +39,7 @@ jobs:
         run: pnpm check
 
   integration:
-    name: Setup & Playwright Smoke
+    name: Setup & Playwright End-to-End
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -47,28 +47,36 @@ jobs:
       postgres:
         image: postgres:17-alpine
         env:
-          POSTGRES_DB: postgres
+          POSTGRES_DB: ly_fullstack_e2e_ci
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: ci-postgres-password
+          POSTGRES_PASSWORD: ci-db-${{ github.run_id }}-${{ github.run_attempt }}
         ports:
           - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U postgres -d postgres"
+          --health-cmd "pg_isready -U postgres -d ly_fullstack_e2e_ci"
           --health-interval 5s
           --health-timeout 5s
           --health-retries 10
 
     env:
-      SETUP_DATABASE_PASSWORD: ci-postgres-password
+      SETUP_DATABASE_PASSWORD: ci-db-${{ github.run_id }}-${{ github.run_attempt }}
       SETUP_DATABASE_NAME: ly_fullstack_ci
-      SETUP_ADMIN_PASSWORD: admin123
-      DATABASE_URL: postgresql://postgres:ci-postgres-password@127.0.0.1:5432/ly_fullstack_ci?schema=public
+      SETUP_ADMIN_PASSWORD: ci-setup-${{ github.run_id }}-${{ github.run_attempt }}
+      E2E_DATABASE_URL: postgresql://postgres:ci-db-${{ github.run_id }}-${{ github.run_attempt }}@127.0.0.1:5432/ly_fullstack_e2e_ci?schema=public
       E2E_ADMIN_USERNAME: admin
-      E2E_ADMIN_PASSWORD: admin123
+      E2E_ADMIN_PASSWORD: ci-admin-${{ github.run_id }}-${{ github.run_attempt }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Mask ephemeral test credentials
+        shell: bash
+        run: |
+          echo "::add-mask::$SETUP_DATABASE_PASSWORD"
+          echo "::add-mask::$SETUP_ADMIN_PASSWORD"
+          echo "::add-mask::$E2E_ADMIN_PASSWORD"
+          echo "::add-mask::$E2E_DATABASE_URL"
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -85,19 +93,22 @@ jobs:
       - name: Validate pnpm setup on Linux and PostgreSQL
         run: pnpm run setup -- --non-interactive
 
-      - name: Verify migrations and seed data
+      - name: Verify setup migrations and seed data
         run: pnpm verify:setup
 
       - name: Install Chromium
         run: pnpm exec playwright install --with-deps chromium
 
-      - name: Run Playwright smoke tests
+      - name: Run Playwright end-to-end tests
         run: pnpm test:e2e
 
-      - name: Upload Playwright report
-        if: ${{ !cancelled() }}
+      - name: Upload Playwright failure artifacts
+        if: ${{ failure() }}
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 14
+          name: playwright-failure-artifacts
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: warn
+          retention-days: 7

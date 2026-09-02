@@ -21,8 +21,14 @@ export const ADMIN_PAGE_SIZE_OPTIONS = [10, 20, 50, 100] as const;
  * 角色启用状态筛选选项
  */
 export const ADMIN_ROLE_STATUS_OPTIONS: SelectOption[] = [
-  { label: '启用', value: 'ACTIVE' },
-  { label: '停用', value: 'INACTIVE' },
+  {
+    label: '启用',
+    value: 'ACTIVE',
+  },
+  {
+    label: '停用',
+    value: 'INACTIVE',
+  },
 ];
 
 /**
@@ -72,7 +78,12 @@ export const ADMIN_DICTIONARY_FILTER_MODEL: AdminDictionaryFilterModel = {
 };
 
 export const ADMIN_DICTIONARY_FILTER_CONFIG: DataFilterFieldConfig[] = [
-  { type: 'input', field: 'keyword', label: '关键词', placeholder: '字典名称或编码' },
+  {
+    type: 'input',
+    field: 'keyword',
+    label: '关键词',
+    placeholder: '字典名称或编码',
+  },
   {
     type: 'select',
     field: 'status',
@@ -111,7 +122,12 @@ export const ADMIN_PUBLIC_CONFIG_FILTER_MODEL: AdminPublicConfigFilterModel = {
 };
 
 export const ADMIN_PUBLIC_CONFIG_FILTER_CONFIG: DataFilterFieldConfig[] = [
-  { type: 'input', field: 'keyword', label: '关键词', placeholder: '配置键或说明' },
+  {
+    type: 'input',
+    field: 'keyword',
+    label: '关键词',
+    placeholder: '配置键或说明',
+  },
 ];
 
 export const ADMIN_PUBLIC_CONFIG_FORM_MODEL: AdminPublicConfigFormModel = {
@@ -124,8 +140,14 @@ export const ADMIN_PUBLIC_CONFIG_FORM_MODEL: AdminPublicConfigFormModel = {
  * 用户启用状态筛选选项
  */
 export const ADMIN_USER_STATUS_OPTIONS: SelectOption[] = [
-  { label: '启用', value: 'ACTIVE' },
-  { label: '停用', value: 'INACTIVE' },
+  {
+    label: '启用',
+    value: 'ACTIVE',
+  },
+  {
+    label: '停用',
+    value: 'INACTIVE',
+  },
 ];
 
 /**

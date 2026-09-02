@@ -28,7 +28,7 @@ export const getBaseConfig = (envMode = 'development'): RsbuildConfig => {
    * 管理后台当前部署在站点根路径；调整部署子路径时必须同步影响静态资源、版本清单和 Worker 作用域。
    */
   const assetPrefix = '/';
-  const isDev: boolean = env.appEnv === 'development';
+  const isDev: boolean = env.appEnv === 'development' || process.env.PLAYWRIGHT_TEST === '1';
 
   /**
    * 版本清单和 Service Worker 使用的部署基础路径
@@ -36,9 +36,10 @@ export const getBaseConfig = (envMode = 'development'): RsbuildConfig => {
   const basePath = assetPrefix.endsWith('/') ? assetPrefix : `${assetPrefix}/`;
 
   /**
-   * 离线缓存默认只在 test 和 production 构建启用，开发环境返回 null，避免 Worker 干扰 HMR。
+   * 离线缓存默认只在 test 和 production 构建启用，开发环境和 Playwright dev server 返回 null，
+   * 避免 Worker 请求不存在的静态产物并干扰 HMR 或端到端诊断。
    */
-  const offlineIntegration = buildOfflineIntegration(env.appEnv, assetPrefix);
+  const offlineIntegration = isDev ? null : buildOfflineIntegration(env.appEnv, assetPrefix);
 
   /**
    * 构建运行时入口

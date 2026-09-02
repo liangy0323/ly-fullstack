@@ -88,7 +88,7 @@ LY Fullstack 当前采用以 NestJS 模块化单体为核心的工程架构，�
 | 共享包   | `@repo/shared`（跨应用类型与无 UI 框架通用工具）                    |
 | 图表包   | `@repo/charts`（ECharts 按需注册、初始化与公共类型）                |
 | 工程基线 | pnpm workspace + Turborepo + ESLint + Prettier + Husky + commitlint |
-| 测试     | Rstest                                                              |
+| 测试     | Rstest + Playwright                                                 |
 
 ## 快速开始
 
@@ -199,7 +199,9 @@ pnpm new:server
 | `pnpm lint`               | ESLint 检查（`lint:fix` 自动修复）               |
 | `pnpm format`             | Prettier 格式化（`format:check` 仅检查）         |
 | `pnpm test`               | 服务模板冒烟测试与全仓 Rstest 单元测试           |
-| `pnpm test:e2e`           | 启动管理系统并执行 Playwright 关键流程冒烟测试   |
+| `pnpm test:e2e`           | 使用独立数据库启动三端并执行 Playwright 完整回归 |
+| `pnpm test:e2e:ui`        | 在 Playwright UI 模式运行端到端测试              |
+| `pnpm test:e2e:report`    | 打开上一次 Playwright HTML 报告                  |
 | `pnpm build`              | 构建全部产物                                     |
 | `pnpm docs:dev`           | 启动 Rspress 官方文档站                          |
 | `pnpm docs:build`         | 构建文档站、页面 Markdown 与 `llms.txt`          |
@@ -221,6 +223,7 @@ ly-fullstack/
 │   ├── templates/server/      # 可生成的 NestJS 服务底座
 │   └── *.mjs                  # 启动、初始化、配置读取与模板测试脚本
 ├── docs/                      # 工程专题文档与实现真相源
+├── tests/e2e/                 # Playwright 真实认证、RBAC 与业务闭环测试
 ├── website/                   # Rspress 官方使用文档站源码
 ├── .rules/                    # 开发规范
 ├── .github/workflows/ci.yml   # Pull Request 与 main 分支质量门禁
@@ -265,15 +268,16 @@ ly-fullstack/
 
 面向具体专题的实现说明，按需查阅：
 
-| 文档                                                             | 内容                           |
-| ---------------------------------------------------------------- | ------------------------------ |
-| [`docs/environment.md`](docs/environment.md)                     | 环境变量职责边界与 Setup 行为  |
-| [`docs/public-api.md`](docs/public-api.md)                       | 默认 C 端 API 的能力与安全边界 |
-| [`docs/admin-theme.md`](docs/admin-theme.md)                     | 多主题与 Element Plus 定制方案 |
-| [`docs/admin-design-system.md`](docs/admin-design-system.md)     | 设计系统与页面交付自查清单     |
-| [`docs/admin-version-offline.md`](docs/admin-version-offline.md) | 版本检测与离线缓存             |
-| [`docs/deployment.md`](docs/deployment.md)                       | 生产部署方案                   |
-| [`docs/releases/`](docs/releases)                                | 各版本 Release Notes           |
+| 文档                                                             | 内容                            |
+| ---------------------------------------------------------------- | ------------------------------- |
+| [`docs/environment.md`](docs/environment.md)                     | 环境变量职责边界与 Setup 行为   |
+| [`docs/e2e-testing.md`](docs/e2e-testing.md)                     | Playwright 环境、命令与诊断体系 |
+| [`docs/public-api.md`](docs/public-api.md)                       | 默认 C 端 API 的能力与安全边界  |
+| [`docs/admin-theme.md`](docs/admin-theme.md)                     | 多主题与 Element Plus 定制方案  |
+| [`docs/admin-design-system.md`](docs/admin-design-system.md)     | 设计系统与页面交付自查清单      |
+| [`docs/admin-version-offline.md`](docs/admin-version-offline.md) | 版本检测与离线缓存              |
+| [`docs/deployment.md`](docs/deployment.md)                       | 生产部署方案                    |
+| [`docs/releases/`](docs/releases)                                | 各版本 Release Notes            |
 
 仓库根目录另有 [`ROADMAP.md`](ROADMAP.md)（路线图）、[`CHANGELOG.md`](CHANGELOG.md)（变更记录）与 [`CONTRIBUTING.md`](CONTRIBUTING.md)（贡献流程）。
 

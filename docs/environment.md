@@ -83,17 +83,15 @@ APP_ENV=test
 API_BASE_URL=/api
 ```
 
-普通服务端单元测试不需要为了形式创建环境文件。需要数据库或完整 Admin API 启动的集成测试，由测试任务或 CI 注入以下私有变量：
+普通服务端单元测试不需要为了形式创建环境文件。Playwright 端到端测试由根目录私有 `.env.e2e` 或 CI 注入以下变量：
 
 ```text
-DATABASE_URL=<测试数据库连接串>
-CORS_ORIGINS=<测试前端来源>
-JWT_SECRET=<测试专用随机密钥>
-JWT_EXPIRES_IN=7d
-PORT=<测试服务端口>
+E2E_DATABASE_URL=<本机独立测试数据库连接串>
+E2E_ADMIN_USERNAME=admin
+E2E_ADMIN_PASSWORD=<测试数据库管理员密码>
 ```
 
-如果开发者需要在本地运行完整服务端测试环境，可以创建被 Git 忽略的 `apps/admin-api/.env.test`，但不能复用生产密钥，也不能提交该文件。
+测试启动器为两个 API 注入随机 JWT 密钥、CORS 来源和独立端口，并自动执行 migration/seed。数据库名称必须包含 `e2e`、`test` 或 `ci`，且只允许本机 PostgreSQL；详细命令与失败产物见 [`e2e-testing.md`](e2e-testing.md)。
 
 ## 生产环境与自动化部署
 

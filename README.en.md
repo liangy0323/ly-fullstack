@@ -88,7 +88,7 @@ The admin console includes complete dark and light themes. On the first visit, i
 | Shared package | `@repo/shared` (cross-app types and framework-agnostic utilities)                 |
 | Charts package | `@repo/charts` (ECharts on-demand registration, initialization, and shared types) |
 | Engineering    | pnpm workspace + Turborepo + ESLint + Prettier + Husky + commitlint               |
-| Testing        | Rstest                                                                            |
+| Testing        | Rstest + Playwright                                                               |
 
 ## Quick Start
 
@@ -199,7 +199,9 @@ Business APIs can serve any client stack: mini apps, SSR sites built with Nuxt o
 | `pnpm lint`               | ESLint check (`lint:fix` auto-fixes)                                                |
 | `pnpm format`             | Prettier formatting (`format:check` checks only)                                    |
 | `pnpm test`               | Service template smoke tests and workspace-wide Rstest unit tests                   |
-| `pnpm test:e2e`           | Start the admin system and run Playwright critical-path smoke tests                 |
+| `pnpm test:e2e`           | Start all three apps with an isolated database and run the Playwright regression    |
+| `pnpm test:e2e:ui`        | Run end-to-end tests in Playwright UI mode                                          |
+| `pnpm test:e2e:report`    | Open the latest Playwright HTML report                                              |
 | `pnpm build`              | Build all applications and packages                                                 |
 | `pnpm docs:dev`           | Start the Rspress documentation site                                                |
 | `pnpm docs:build`         | Build the site, per-page Markdown, and `llms.txt`                                   |
@@ -221,6 +223,7 @@ ly-fullstack/
 │   ├── templates/server/      # Template used to generate NestJS services
 │   └── *.mjs                  # Development, setup, config loading, and template test scripts
 ├── docs/                      # Engineering topic docs and implementation source of truth
+├── tests/e2e/                 # Playwright tests for real authentication, RBAC, and business flows
 ├── website/                   # Rspress official documentation source
 ├── .rules/                    # Development conventions
 ├── .github/workflows/ci.yml   # Quality gate for pull requests and the main branch
@@ -268,6 +271,7 @@ Consult these topic-specific implementation notes as needed:
 | Document                                                         | Contents                                                |
 | ---------------------------------------------------------------- | ------------------------------------------------------- |
 | [`docs/environment.md`](docs/environment.md)                     | Environment variable boundaries and Setup behavior      |
+| [`docs/e2e-testing.md`](docs/e2e-testing.md)                     | Playwright environment, commands, and diagnostics       |
 | [`docs/public-api.md`](docs/public-api.md)                       | Capabilities and security boundaries of the default API |
 | [`docs/admin-theme.md`](docs/admin-theme.md)                     | Multi-theme and Element Plus customization              |
 | [`docs/admin-design-system.md`](docs/admin-design-system.md)     | Design system and page delivery checklist               |
